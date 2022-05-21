@@ -1,8 +1,8 @@
-# Importing essential libraries
+# Importing necessary libraries
 from flask import Flask, render_template, request, jsonify
 import pickle
 
-# Load the Multinomial Naive Bayes model and CountVectorizer object from disk
+# Loading Multinomial Naive Bayes model and CountVectorizer object
 filename = 'voting_clf.pkl'
 classifier = pickle.load(open(filename, 'rb'))
 cv = pickle.load(open('countvector.pkl', 'rb'))
