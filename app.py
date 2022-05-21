@@ -14,8 +14,10 @@ app = Flask(__name__)
 @app.route('/', methods=['POST'])
 def home():
     if request.method == 'POST':
-        review = request.get_json()
-        data = [review['review']]
+        jsonData = request.get_json()
+        data = [jsonData['review']]
+        if type(jsonData['review']) is list:
+            data = jsonData['review']
         vect = cv.transform(data).toarray()
         my_prediction = classifier.predict(vect).tolist()
         return jsonify({'isItGood': json.dumps(my_prediction)})
