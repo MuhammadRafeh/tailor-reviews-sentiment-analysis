@@ -2,6 +2,7 @@
 from flask import Flask, request, jsonify
 import pickle
 import json
+from flask_cors import CORS, cross_origin
 
 # Loading Multinomial Naive Bayes model and CountVectorizer object
 filename = 'voting_clf.pkl'
@@ -9,9 +10,11 @@ classifier = pickle.load(open(filename, 'rb'))
 cv = pickle.load(open('countvector.pkl', 'rb'))
 
 app = Flask(__name__)
+CORS(app, resources={r"*": {"origins": "*"}})
 
 
 @app.route('/', methods=['POST'])
+@cross_origin()
 def home():
     if request.method == 'POST':
         jsonData = request.get_json()
@@ -24,4 +27,5 @@ def home():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
+    # app.run(debug=True)
