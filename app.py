@@ -18,7 +18,7 @@ def home():
         data = [review['review']]
         vect = cv.transform(data).toarray()
         my_prediction = classifier.predict(vect).tolist()
-        return jsonify({'isItOk': json.dumps(my_prediction)})
+        return jsonify({'isItGood': json.dumps(my_prediction)})
 
 
 if __name__ == '__main__':
