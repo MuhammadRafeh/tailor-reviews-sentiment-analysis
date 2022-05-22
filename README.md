@@ -1,5 +1,5 @@
 # Tailor Reviews Sentiment Analysis
-A Flask based web api where anyone can check it's reviews related tailor/clothes if it is good or bad one, 1 for good and 0 means its a bad review.
+A Flask based web api where anyone can check it's reviews related tailor/clothes if it is good or bad one, 1 for good and 0 for bad review.
 
 ## Usage
 ```js
