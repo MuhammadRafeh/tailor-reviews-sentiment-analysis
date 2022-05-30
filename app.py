@@ -11,10 +11,12 @@ cv = pickle.load(open('countvector.pkl', 'rb'))
 
 app = Flask(__name__)
 CORS(app, resources={r"*": {"origins": "*"}})
+app.config['CORS_METHODS'] = ['GET', 'PUT', 'POST', 'DELETE', 'PATCH']
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 
-@app.route('/', methods=['POST'])
-@cross_origin()
+@app.route('/', methods=['POST', 'GET'])
+@cross_origin(origin='*')
 def home():
     if request.method == 'POST':
         jsonData = request.get_json()
@@ -24,6 +26,8 @@ def home():
         vect = cv.transform(data).toarray()
         my_prediction = classifier.predict(vect).tolist()
         return jsonify({'isItGood': json.dumps(my_prediction)})
+    if request.method == 'GET':
+        return '<h1>This is Api using for AR Attire</h1>'
 
 
 if __name__ == '__main__':
